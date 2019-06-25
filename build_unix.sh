@@ -1,15 +1,11 @@
 cd ~/Downloads
-
 ###sudo visudo
 voltaire ALL=(ALL) NOPASSWD: ALL
-
 ### install vim
 sudo apt-get install -y vim
-
 ### install inconsolata font
 sudo apt-get install fonts-inconsolata -y
 sudo fc-cache -fv
-
 ### install terminator
 sudo apt-get update
 sudo apt-get install -y terminator
