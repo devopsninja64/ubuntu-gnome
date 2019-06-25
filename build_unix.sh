@@ -66,6 +66,9 @@ sudo apt install -y chrome-gnome-shell
 #dash to dock
 #dash to panel
 #compton
+### materia gtk2/3 theme
+sudo apt install materia-gtk-theme
+
 ####################
 
 
