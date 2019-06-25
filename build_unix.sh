@@ -9,31 +9,59 @@ sudo fc-cache -fv
 ### install terminator
 sudo apt-get update
 sudo apt-get install -y terminator
+### install chrome
+sudo apt-get install -y libxss1 libappindicator1 libindicator7
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome*.deb
+rm -rf google-chrome*.deb
+
+### install vscode
+sudo apt-get install -y curl
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+sudo apt-get update
+sudo apt-get install -y code # or code-insiders
+# set as default text editor
+sudo update-alternatives --set editor /usr/bin/code
+
+### install docker
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce
+
+### install kubernetes cli
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+### install azure cli
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | \
+     sudo tee /etc/apt/sources.list.d/azure-cli.list
+sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
+sudo apt-get install -y apt-transport-https
+sudo apt-get update && sudo apt-get install -y azure-cli
+
+### install diff tool meld
+sudo apt-get install -y meld
+
 
 ### install terminology
 sudo add-apt-repository ppa:enlightenment-git/ppa
 sudo apt-get update
 sudo apt-get install -y terminology
 
-### install vscode
-#download .deb package
-#sudo dpkg -i <file>.deb
-#sudo apt-get install -f # Install dependencies
-
-### install vscode
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt-get update
-sudo apt-get install -y code # or code-insiders
-
-# set as default text editor
-sudo update-alternatives --set editor /usr/bin/code
-
-### install chrome
-sudo apt-get install -y libxss1 libappindicator1 libindicator7
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome*.deb
 
 ### install dropbox
 sudo nano /etc/apt/sources.list
@@ -64,33 +92,6 @@ sudo apt-get install -y git
 ### install curl
 sudo apt-get install -y curl
 
-### install docker
-sudo apt-get update
-sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo apt-key fingerprint 0EBFCD88
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-sudo apt-get update
-sudo apt-get install -y docker-ce
-
-### install kubernetes cli
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
-
-### install azure cli
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | \
-     sudo tee /etc/apt/sources.list.d/azure-cli.list
-sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
-sudo apt-get install -y apt-transport-https
-sudo apt-get update && sudo apt-get install -y azure-cli
 
 ### install viber
 wget -O viber64-NoobsLab.com.deb http://download.cdn.viber.com/cdn/desktop/Linux/viber.deb  
@@ -115,10 +116,6 @@ sudo apt-get install -y libunwind8 libicu55
 wget https://github.com/PowerShell/PowerShell/releases/download/v6.0.0-alpha.9/powershell_6.0.0-alpha.9-1ubuntu1.16.04.1_amd64.deb
 sudo dpkg -i powershell_6.0.0-alpha.9-1ubuntu1.16.04.1_amd64.deb
 
-
-### install diff tool meld
-sudo apt-get install -y meld
-
 ### install .NET
 # add product key
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
@@ -128,8 +125,3 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsof
 # install .net sdk
 sudo apt-get update
 sudo apt-get install -y dotnet-sdk-2.0.2
-
-# install dark background white text
-sudo install-mozilla-addon https://addons.mozilla.org/firefox/downloads/file/774205/dark_background_and_light_text-0.6.6-an+fx.xpi
- 
-
