@@ -68,7 +68,10 @@ sudo apt install -y chrome-gnome-shell
 #compton
 ### materia gtk2/3 theme
 sudo apt install materia-gtk-theme
-
+### papirus icon theme
+sudo add-apt-repository ppa:papirus/papirus
+sudo apt-get update
+sudo apt-get install papirus-icon-theme
 ####################
 
 
